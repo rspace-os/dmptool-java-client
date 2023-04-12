@@ -24,44 +24,44 @@ public class DMPToolClientImpl implements DMPToolClient {
 			this.restTemplate = new RestTemplate();
 	}
 
-  public DMPList listPlans(
-    DMPPlanScope scope,
-    String accessToken
-   ) throws MalformedURLException, URISyntaxException {
+	public DMPList listPlans(
+		DMPPlanScope scope,
+		String accessToken
+	 ) throws MalformedURLException, URISyntaxException {
 		return restTemplate.exchange(
 				this.apiUrlBase + "plans?scope" + scope.name().toLowerCase(),
 				HttpMethod.GET,
 				new HttpEntity<>(getHttpHeaders(accessToken)),
 				DMPList.class
 		).getBody();
-  }
+	}
 
-  public DMP getPlanById(
-    String dmpId,
-    String accessToken
-   ) throws MalformedURLException, URISyntaxException {
-    return null;
-  }
+	public DMP getPlanById(
+		String dmpId,
+		String accessToken
+	 ) throws MalformedURLException, URISyntaxException {
+		return null;
+	}
 
-  public byte[] getPdfBytes(
-    Integer id,
-    String accessToken
-   ) throws URISyntaxException, MalformedURLException {
-    return null;
-  }
+	public byte[] getPdfBytes(
+		Integer id,
+		String accessToken
+	 ) throws URISyntaxException, MalformedURLException {
+		return null;
+	}
 
-  public Boolean postRelatedIdentifiers(
-    DMPIdPost dmpId,
-    RelatedIdentifier relatedIdentifier,
-    String accessToken
-   ) throws URISyntaxException, MalformedURLException {
-    return null;
-  }
+	public Boolean postRelatedIdentifiers(
+		DMPIdPost dmpId,
+		RelatedIdentifier relatedIdentifier,
+		String accessToken
+	 ) throws URISyntaxException, MalformedURLException {
+		return null;
+	}
 
 	private HttpHeaders getHttpHeaders(String accessToken) {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-Type", "application/json");
-      headers.add("Authorization", String.format("Bearer %s", accessToken));
+			headers.add("Authorization", String.format("Bearer %s", accessToken));
 			return headers;
 	}
 
