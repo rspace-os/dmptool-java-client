@@ -3,10 +3,13 @@ package com.researchspace.dmptool.client;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URI;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpEntity;
+import java.util.Collections;
+import org.springframework.http.MediaType;
 
 import com.researchspace.dmptool.model.DMPList;
 import com.researchspace.dmptool.model.DMP;
@@ -20,19 +23,20 @@ public class DMPToolClientImpl implements DMPToolClient {
 	private RestTemplate restTemplate;
 
 	public DMPToolClientImpl(URL apiUrlBase) {
-			this.apiUrlBase = apiUrlBase;
-			this.restTemplate = new RestTemplate();
+		this.apiUrlBase = apiUrlBase;
+		this.restTemplate = new RestTemplate();
 	}
 
 	public DMPList listPlans(
 		DMPPlanScope scope,
 		String accessToken
 	 ) throws MalformedURLException, URISyntaxException {
+		String path = "plans?scope=" + scope.name().toLowerCase();
 		return restTemplate.exchange(
-				this.apiUrlBase + "plans?scope" + scope.name().toLowerCase(),
-				HttpMethod.GET,
-				new HttpEntity<>(getHttpHeaders(accessToken)),
-				DMPList.class
+			new URL(this.apiUrlBase, path).toURI(),
+			HttpMethod.GET,
+			new HttpEntity<>(getHttpHeaders(accessToken)),
+			DMPList.class
 		).getBody();
 	}
 
@@ -59,10 +63,10 @@ public class DMPToolClientImpl implements DMPToolClient {
 	}
 
 	private HttpHeaders getHttpHeaders(String accessToken) {
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("Content-Type", "application/json");
-			headers.add("Authorization", String.format("Bearer %s", accessToken));
-			return headers;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.add("Authorization", String.format("Bearer %s", accessToken));
+		return headers;
 	}
 
 }
