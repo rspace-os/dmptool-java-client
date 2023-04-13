@@ -12,7 +12,7 @@ import java.util.Collections;
 import org.springframework.http.MediaType;
 
 import com.researchspace.dmptool.model.DMPList;
-import com.researchspace.dmptool.model.DMP;
+import com.researchspace.dmptool.model.DMPToolDMP;
 import com.researchspace.dmptool.model.DMPPlanScope;
 import com.researchspace.dmptool.model.DMPIdPost;
 import com.researchspace.dmptool.model.RelatedIdentifier;
@@ -40,7 +40,7 @@ public class DMPToolClientImpl implements DMPToolClient {
 		).getBody();
 	}
 
-	public DMP getPlanById(
+	public DMPToolDMP getPlanById(
 		String dmpId,
 		String accessToken
 	 ) throws MalformedURLException, URISyntaxException {
@@ -54,7 +54,7 @@ public class DMPToolClientImpl implements DMPToolClient {
 	}
 
 	public byte[] getPdfBytes(
-		Integer id,
+    DMPToolDMP dmp,
 		String accessToken
 	 ) throws URISyntaxException, MalformedURLException {
 		return null;

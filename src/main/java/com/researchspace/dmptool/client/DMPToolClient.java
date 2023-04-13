@@ -1,7 +1,7 @@
 package com.researchspace.dmptool.client;
 
 import com.researchspace.dmptool.model.DMPList;
-import com.researchspace.dmptool.model.DMP;
+import com.researchspace.dmptool.model.DMPToolDMP;
 import com.researchspace.dmptool.model.DMPPlanScope;
 import com.researchspace.dmptool.model.DMPIdPost;
 import com.researchspace.dmptool.model.RelatedIdentifier;
@@ -26,7 +26,7 @@ public interface DMPToolClient {
   /**
    * Gets details of an individual DMP by its ID.
    */
-  DMP getPlanById(
+  DMPToolDMP getPlanById(
     String dmpId,
     String accessToken
    ) throws MalformedURLException, URISyntaxException;
@@ -35,7 +35,7 @@ public interface DMPToolClient {
    * Downloads a PDF of the DMP.
    */
   byte[] getPdfBytes(
-    Integer id,
+    DMPToolDMP dmp,
     String accessToken
    ) throws URISyntaxException, MalformedURLException;
 

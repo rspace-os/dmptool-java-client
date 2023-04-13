@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DMP {
+public class DMPToolDMP {
 
  private Long id;
  private String title;

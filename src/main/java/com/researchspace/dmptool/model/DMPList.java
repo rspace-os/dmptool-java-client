@@ -23,7 +23,7 @@ public class DMPList {
 	@JsonAlias({"total_items"})
 	private Integer totalItems;
 	
-	List<DMP> items = new ArrayList<>();
+	List<DMPToolDMP> items = new ArrayList<>();
 
 }
 
