@@ -57,7 +57,13 @@ public class DMPToolClientImpl implements DMPToolClient {
     DMPToolDMP dmp,
 		String accessToken
 	 ) throws URISyntaxException, MalformedURLException {
-		return null;
+		String path = "plans/" + dmp.getId() + ".pdf";
+		return restTemplate.exchange(
+			new URL(this.apiUrlBase, path).toURI(),
+			HttpMethod.GET,
+			new HttpEntity<>(getHttpHeaders(accessToken)),
+      byte[].class
+		).getBody();
 	}
 
 	public Boolean postRelatedIdentifiers(
