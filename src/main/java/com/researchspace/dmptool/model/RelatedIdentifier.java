@@ -1,7 +1,7 @@
 package com.researchspace.dmptool.model;
 
-import lombok.Data;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 /**
  * The structure of this class is dictated by the request body of the
@@ -12,11 +12,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RelatedIdentifier {
 
-  // Some of these should probably be enums
-  private String descriptor;
-  private String work_type;
-  private String type;
-  private String identifier;
+	// Some of these should probably be enums
+	private String descriptor;
+	private String work_type;
+	private String type;
+	private String identifier;
 
 }
 

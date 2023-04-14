@@ -1,8 +1,7 @@
 package com.researchspace.dmptool.model;
 
-import com.researchspace.dmptool.model.DMPIdType;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.researchspace.dmptool.model.DMPIdType;
 import lombok.Builder;
 import lombok.Value;
 
@@ -10,8 +9,10 @@ import lombok.Value;
 @Builder
 public class DMPIdPost {
 
- @JsonProperty("type")
- DMPIdType idType;
- @JsonProperty("identifier")
- String identifier;
+	@JsonProperty("type")
+	DMPIdType idType;
+
+	@JsonProperty("identifier")
+	String identifier;
+
 }

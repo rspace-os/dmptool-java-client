@@ -1,26 +1,25 @@
 package com.researchspace.dmptool.client;
 
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URI;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpEntity;
-import java.util.Collections;
-import org.springframework.http.MediaType;
-import org.springframework.web.client.RestClientException;
-import lombok.Data;
-import java.util.List;
-import lombok.AllArgsConstructor;
-
-import com.researchspace.dmptool.model.DMPList;
-import com.researchspace.dmptool.model.DMPToolDMP;
-import com.researchspace.dmptool.model.DMPPlanScope;
 import com.researchspace.dmptool.model.DMPIdPost;
 import com.researchspace.dmptool.model.DMPIdType;
+import com.researchspace.dmptool.model.DMPList;
+import com.researchspace.dmptool.model.DMPPlanScope;
+import com.researchspace.dmptool.model.DMPToolDMP;
 import com.researchspace.dmptool.model.RelatedIdentifier;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 public class DMPToolClientImpl implements DMPToolClient {
 
@@ -59,7 +58,7 @@ public class DMPToolClientImpl implements DMPToolClient {
 	}
 
 	public byte[] getPdfBytes(
-    DMPToolDMP dmp,
+		DMPToolDMP dmp,
 		String accessToken
 	 ) throws URISyntaxException, MalformedURLException {
 		String path = "plans/" + dmp.getId() + ".pdf";
@@ -67,45 +66,45 @@ public class DMPToolClientImpl implements DMPToolClient {
 			new URL(this.apiUrlBase, path).toURI(),
 			HttpMethod.GET,
 			new HttpEntity<>(getHttpHeaders(accessToken)),
-      byte[].class
+			byte[].class
 		).getBody();
 	}
 
-  @Data
-  private class RelatedIdentifierRequest {
-    @Data
-    @AllArgsConstructor
-    private class RelatedIdentifierDmpRequest {
-      List<RelatedIdentifier> dmproadmap_related_identifiers;
-      DMPIdPost dmp_id;
-    }
+	@Data
+	private class RelatedIdentifierRequest {
+		@Data
+		@AllArgsConstructor
+		private class RelatedIdentifierDmpRequest {
+			List<RelatedIdentifier> dmproadmap_related_identifiers;
+			DMPIdPost dmp_id;
+		}
 
-    RelatedIdentifierDmpRequest dmp;
+		RelatedIdentifierDmpRequest dmp;
 
-    public RelatedIdentifierRequest(
-        RelatedIdentifier relatedIdentifier,
-        String dmpId
-      ) {
-      this.dmp = new RelatedIdentifierDmpRequest(
-          List.of(relatedIdentifier),
-          DMPIdPost.builder().identifier(dmpId).idType(DMPIdType.url).build()
-        );
-    }
-  }
+		public RelatedIdentifierRequest(
+				RelatedIdentifier relatedIdentifier,
+				String dmpId
+			) {
+			this.dmp = new RelatedIdentifierDmpRequest(
+					List.of(relatedIdentifier),
+					DMPIdPost.builder().identifier(dmpId).idType(DMPIdType.url).build()
+				);
+		}
+	}
 
 	public void postRelatedIdentifiers(
-    String dmpId,
+		String dmpId,
 		RelatedIdentifier relatedIdentifier,
 		String accessToken
 	 ) throws URISyntaxException, MalformedURLException, RestClientException {
 
-    RelatedIdentifierRequest body = new RelatedIdentifierRequest(
-      relatedIdentifier,
-      dmpId
-    );
+		RelatedIdentifierRequest body = new RelatedIdentifierRequest(
+			relatedIdentifier,
+			dmpId
+		);
 
-    HttpHeaders headers = getHttpHeaders(accessToken);
-    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		HttpHeaders headers = getHttpHeaders(accessToken);
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
 		restTemplate.exchange(
 			new URL(this.apiUrlBase, "related_identifiers").toURI(),
