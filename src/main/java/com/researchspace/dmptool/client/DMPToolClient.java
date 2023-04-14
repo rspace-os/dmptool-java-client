@@ -9,6 +9,7 @@ import com.researchspace.dmptool.model.RelatedIdentifier;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import org.springframework.web.client.RestClientException;
 
 /**
  * API Client wrapper for making calls to DMP API.
@@ -42,10 +43,10 @@ public interface DMPToolClient {
   /**
    * Posts an additional related identifier, such as a DOI, to the DMP.
    */
-  Boolean postRelatedIdentifiers(
-    DMPIdPost dmpId, // TODO: should this just be a DMP?
+  void postRelatedIdentifiers(
+    String dmpId,
     RelatedIdentifier relatedIdentifier,
     String accessToken
-   ) throws URISyntaxException, MalformedURLException;
+   ) throws URISyntaxException, MalformedURLException, RestClientException;
 
 }

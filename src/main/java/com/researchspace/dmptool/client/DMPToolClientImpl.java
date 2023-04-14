@@ -10,11 +10,16 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpEntity;
 import java.util.Collections;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.RestClientException;
+import lombok.Data;
+import java.util.List;
+import lombok.AllArgsConstructor;
 
 import com.researchspace.dmptool.model.DMPList;
 import com.researchspace.dmptool.model.DMPToolDMP;
 import com.researchspace.dmptool.model.DMPPlanScope;
 import com.researchspace.dmptool.model.DMPIdPost;
+import com.researchspace.dmptool.model.DMPIdType;
 import com.researchspace.dmptool.model.RelatedIdentifier;
 
 public class DMPToolClientImpl implements DMPToolClient {
@@ -66,12 +71,48 @@ public class DMPToolClientImpl implements DMPToolClient {
 		).getBody();
 	}
 
-	public Boolean postRelatedIdentifiers(
-		DMPIdPost dmpId,
+  @Data
+  private class RelatedIdentifierRequest {
+    @Data
+    @AllArgsConstructor
+    private class RelatedIdentifierDmpRequest {
+      List<RelatedIdentifier> dmproadmap_related_identifiers;
+      DMPIdPost dmp_id;
+    }
+
+    RelatedIdentifierDmpRequest dmp;
+
+    public RelatedIdentifierRequest(
+        RelatedIdentifier relatedIdentifier,
+        String dmpId
+      ) {
+      this.dmp = new RelatedIdentifierDmpRequest(
+          List.of(relatedIdentifier),
+          DMPIdPost.builder().identifier(dmpId).idType(DMPIdType.url).build()
+        );
+    }
+  }
+
+	public void postRelatedIdentifiers(
+    String dmpId,
 		RelatedIdentifier relatedIdentifier,
 		String accessToken
-	 ) throws URISyntaxException, MalformedURLException {
-		return null;
+	 ) throws URISyntaxException, MalformedURLException, RestClientException {
+
+    RelatedIdentifierRequest body = new RelatedIdentifierRequest(
+      relatedIdentifier,
+      dmpId
+    );
+
+    HttpHeaders headers = getHttpHeaders(accessToken);
+    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+		restTemplate.exchange(
+			new URL(this.apiUrlBase, "related_identifiers").toURI(),
+			HttpMethod.POST,
+			new HttpEntity<>(body, headers),
+			String.class
+		);
 	}
 
 	private HttpHeaders getHttpHeaders(String accessToken) {
