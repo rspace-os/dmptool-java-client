@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.rspace-os</groupId>
     <artifactId>dmptool-java-client</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <build>
         <resources></resources>
@@ -89,6 +89,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.21</version>
+        </dependency>
+        <dependency>
+            <groupId>com.researchspace</groupId>
+            <artifactId>rda-dmp-common-standard</artifactId>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

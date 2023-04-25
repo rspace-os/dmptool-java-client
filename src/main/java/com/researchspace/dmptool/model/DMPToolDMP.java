@@ -5,21 +5,28 @@ import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.Optional;
+import com.researchspace.rda.model.DMP;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class DMPToolDMP {
+public class DMPToolDMP extends DMP {
 
 	private Long id;
-	private String title;
-	private String description;
 
+	public DMPToolDMP(Long id, String title, String description) {
+		super();
+		this.setTitle(title);
+		this.setDescription(Optional.of(description));
+		this.id = id;
+	}
+
+	// can I avoid this? It means that the other properties of DMP are not getting parsed
 	@SuppressWarnings("unchecked")
 	@JsonProperty("dmp")
 	private void unpackNested(Map<String,Object> dmp) {
-		this.title = (String) dmp.get("title");
-		this.description = (String) dmp.get("description");
+		this.setTitle((String) dmp.get("title"));
+		this.setDescription(Optional.of((String) dmp.get("description")));
 
 		Map<String,String> links = (Map<String,String>) dmp.get("dmproadmap_links");
 		String getUrlString = links.get("get");
