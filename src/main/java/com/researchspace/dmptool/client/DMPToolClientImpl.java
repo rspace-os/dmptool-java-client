@@ -53,7 +53,7 @@ public class DMPToolClientImpl implements DMPToolClient {
 			HttpMethod.GET,
 			new HttpEntity<>(getHttpHeaders(accessToken)),
 			DMPList.class
-		).getBody().getItems().get(0).getDmp();
+		).getBody().getItems().get(0);
 	}
 
 	public byte[] getPdfBytes(

@@ -21,34 +21,7 @@ public class DMPList {
 	@JsonAlias({"total_items"})
 	private Integer totalItems;
 	
-	List<DMPWrapper> items = new ArrayList<>();
+	List<DMPToolDMP> items = new ArrayList<>();
 
-	// @SuppressWarnings("unchecked")
-	// @JsonProperty("items")
-	// private void unpackNested(List<Map<String, Object>> objs) {
-
-    // List<DMPToolDMP> items = new ArrayList<>();
-    // for(Map<String, Object> obj : objs) {
-      // items.add((DMPToolDMP) obj.get("dmp")); // this casting don't work
-    // }
-    // // return items;
-    // this.items = items;
-
-
-
-    // this.items = (List<DMPToolDMP>) 
-		// this.setTitle((String) dmp.get("title"));
-		// this.setDescription(Optional.of((String) dmp.get("description")));
-
-		// Map<String,String> links = (Map<String,String>) dmp.get("dmproadmap_links");
-		// String getUrlString = links.get("get");
-		// String idString = getUrlString.substring(getUrlString.lastIndexOf("/") + 1);
-
-		// try {
-		 // this.id = Long.parseLong(idString); 
-		// } catch (NumberFormatException e) {
-		 // // ignore
-		// }
-	// }
 }
 

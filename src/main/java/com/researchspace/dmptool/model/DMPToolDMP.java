@@ -9,10 +9,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Optional;
 import com.researchspace.rda.model.DMP;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Data
 @NoArgsConstructor
-@JsonRootName(value = "dmp") // no evidence this is working
+@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
+@JsonTypeName(value = "dmp")
 public class DMPToolDMP extends DMP {
 
 	private Long id;
@@ -20,13 +23,13 @@ public class DMPToolDMP extends DMP {
   @JsonProperty("dmproadmap_links")
   private Map<String, String> links;
 
-  @JsonSetter("id")
-  public Long setId() {
+  @JsonProperty("id")
+  public void setId() {
 		// Map<String,String> links = (Map<String,String>) dmp.get("dmproadmap_links");
 		String getUrlString = links.get("get");
 		String idString = getUrlString.substring(getUrlString.lastIndexOf("/") + 1);
 
-    return Long.parseLong(idString); 
+    this.id = Long.parseLong(idString); 
 	}
   // we want to use @JsonGetter to define a method that just gets the id
 
