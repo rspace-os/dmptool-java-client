@@ -93,7 +93,7 @@
         <dependency>
             <groupId>com.researchspace</groupId>
             <artifactId>rda-dmp-common-standard</artifactId>
-            <version>0.0.1</version>
+            <version>f35c9a0900</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
