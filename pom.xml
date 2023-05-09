@@ -7,6 +7,12 @@
     <artifactId>dmptool-java-client</artifactId>
     <version>0.0.2</version>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
     <build>
         <resources></resources>
         <sourceDirectory>src/main/java</sourceDirectory>
