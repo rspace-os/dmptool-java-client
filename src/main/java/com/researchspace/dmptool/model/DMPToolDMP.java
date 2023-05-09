@@ -22,11 +22,8 @@ public class DMPToolDMP extends DMP {
 	private Map<String, String> links;
 
 	/*
-	 * This is... unfortunate. Would be much better for us to be using the
-	 * proper dmp_id property as a unique identifier, rather than the
-	 * internal implementation detail used by DMPTool. However, it is now
-	 * used as a database key (UserDMP) so removing this without breaking
-	 * backwards compatibility will be difficult.
+	 * This is maintained for backwards compatibility and may be removed in the
+	 * future in favour of using the dmp_id property as a unique identifier.
 	 */
 	public Long getId() {
 		String getUrlString = this.links.get("get");
