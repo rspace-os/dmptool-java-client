@@ -1,7 +1,5 @@
 package com.researchspace.dmptool.client;
 
-import com.researchspace.dmptool.model.DMPIdPost;
-import com.researchspace.dmptool.model.DMPIdType;
 import com.researchspace.dmptool.model.DMPList;
 import com.researchspace.dmptool.model.DMPPlanScope;
 import com.researchspace.dmptool.model.DMPToolDMP;
@@ -20,6 +18,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import com.researchspace.rda.model.DmpId;
 
 public class DMPToolClientImpl implements DMPToolClient {
 
@@ -61,9 +60,9 @@ public class DMPToolClientImpl implements DMPToolClient {
 		DMPToolDMP dmp,
 		String accessToken
 	 ) throws URISyntaxException, MalformedURLException {
-		String path = "plans/" + dmp.getId() + ".pdf";
+		URI uri = new URL(dmp.getLinks().get("download")).toURI();
 		return restTemplate.exchange(
-			new URL(this.apiUrlBase, path).toURI(),
+			uri,
 			HttpMethod.GET,
 			new HttpEntity<>(getHttpHeaders(accessToken)),
 			byte[].class
@@ -76,7 +75,7 @@ public class DMPToolClientImpl implements DMPToolClient {
 		@AllArgsConstructor
 		private class RelatedIdentifierDmpRequest {
 			List<RelatedIdentifier> dmproadmap_related_identifiers;
-			DMPIdPost dmp_id;
+			DmpId dmp_id;
 		}
 
 		RelatedIdentifierDmpRequest dmp;
@@ -87,7 +86,7 @@ public class DMPToolClientImpl implements DMPToolClient {
 			) {
 			this.dmp = new RelatedIdentifierDmpRequest(
 					List.of(relatedIdentifier),
-					DMPIdPost.builder().identifier(dmpId).idType(DMPIdType.url).build()
+					new DmpId(dmpId, DmpId.DmpIdType.URL)
 				);
 		}
 	}

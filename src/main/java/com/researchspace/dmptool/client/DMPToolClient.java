@@ -1,6 +1,5 @@
 package com.researchspace.dmptool.client;
 
-import com.researchspace.dmptool.model.DMPIdPost;
 import com.researchspace.dmptool.model.DMPList;
 import com.researchspace.dmptool.model.DMPPlanScope;
 import com.researchspace.dmptool.model.DMPToolDMP;

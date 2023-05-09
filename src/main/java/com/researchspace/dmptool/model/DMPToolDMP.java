@@ -1,34 +1,34 @@
 package com.researchspace.dmptool.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.Optional;
+import com.researchspace.rda.model.DMP;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class DMPToolDMP {
+@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
+@JsonTypeName(value = "dmp")
+public class DMPToolDMP extends DMP {
 
-	private Long id;
-	private String title;
-	private String description;
+	@JsonProperty("dmproadmap_links")
+	private Map<String, String> links;
 
-	@SuppressWarnings("unchecked")
-	@JsonProperty("dmp")
-	private void unpackNested(Map<String,Object> dmp) {
-		this.title = (String) dmp.get("title");
-		this.description = (String) dmp.get("description");
-
-		Map<String,String> links = (Map<String,String>) dmp.get("dmproadmap_links");
-		String getUrlString = links.get("get");
+	/*
+	 * This is maintained for backwards compatibility and may be removed in the
+	 * future in favour of using the dmp_id property as a unique identifier.
+	 */
+	public Long getId() {
+		String getUrlString = this.links.get("get");
 		String idString = getUrlString.substring(getUrlString.lastIndexOf("/") + 1);
-
-		try {
-		 this.id = Long.parseLong(idString); 
-		} catch (NumberFormatException e) {
-		 // ignore
-		}
+		return Long.parseLong(idString);
 	}
+
 }
