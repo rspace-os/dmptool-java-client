@@ -100,9 +100,9 @@ public class DMPToolClientImpl implements DMPToolClient {
 		String accessToken
 	 ) throws URISyntaxException, MalformedURLException, RestClientException, JsonProcessingException {
 
-
 		var relatedIds = Map.of("descriptor", relatedIdentifier.descriptor, "work_type", relatedIdentifier.work_type, "type", relatedIdentifier.type, "identifier", relatedIdentifier.identifier);
-		var dmp = Map.of("dmproadmap_related_identifiers", List.of(relatedIds),"dmp_id",dmpId);
+		var id_object = Map.of("type", "url", "identifier", dmpId);
+		var dmp = Map.of("dmproadmap_related_identifiers", List.of(relatedIds),"dmp_id",id_object);
 		var wrapper = Map.of("dmp", dmp);
 
 		String body = new ObjectMapper().writeValueAsString(wrapper);
