@@ -13,10 +13,10 @@ import lombok.Data;
 public class RelatedIdentifier {
 
 	// Some of these should probably be enums
-	private String descriptor;
-	private String work_type;
-	private String type;
-	private String identifier;
+	public String descriptor;
+	public String work_type;
+	public String type;
+	public String identifier;
 
 }
 

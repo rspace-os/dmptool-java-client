@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpEntity;
@@ -19,6 +20,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import com.researchspace.rda.model.DmpId;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class DMPToolClientImpl implements DMPToolClient {
 
@@ -95,12 +98,14 @@ public class DMPToolClientImpl implements DMPToolClient {
 		String dmpId,
 		RelatedIdentifier relatedIdentifier,
 		String accessToken
-	 ) throws URISyntaxException, MalformedURLException, RestClientException {
+	 ) throws URISyntaxException, MalformedURLException, RestClientException, JsonProcessingException {
 
-		RelatedIdentifierRequest body = new RelatedIdentifierRequest(
-			relatedIdentifier,
-			dmpId
-		);
+
+		var relatedIds = Map.of("descriptor", relatedIdentifier.descriptor, "work_type", relatedIdentifier.work_type, "type", relatedIdentifier.type, "identifier", relatedIdentifier.identifier);
+		var dmp = Map.of("dmproadmap_related_identifiers", List.of(relatedIds),"dmp_id",dmpId);
+		var wrapper = Map.of("dmp", dmp);
+
+		String body = new ObjectMapper().writeValueAsString(wrapper);
 
 		HttpHeaders headers = getHttpHeaders(accessToken);
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
