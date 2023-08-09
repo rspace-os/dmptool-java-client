@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.rspace-os</groupId>
     <artifactId>dmptool-java-client</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 
     <repositories>
         <repository>
@@ -99,7 +99,7 @@
         <dependency>
             <groupId>com.github.rspace-os</groupId>
             <artifactId>rda-dmp-common-standard</artifactId>
-            <version>fce5bc35cb</version>
+            <version>4fab9c1698</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
