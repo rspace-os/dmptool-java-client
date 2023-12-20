@@ -105,7 +105,7 @@
         <dependency>
             <groupId>com.github.rspace-os</groupId>
             <artifactId>rda-dmp-common-standard</artifactId>
-            <version>542bd382e2</version>
+            <version>0.0.4</version>
         </dependency>
 
         <dependency>
