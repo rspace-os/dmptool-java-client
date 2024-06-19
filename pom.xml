@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     
     <artifactId>dmptool-java-client</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 
     <parent>
         <groupId>com.github.rspace-os</groupId>
@@ -105,7 +105,7 @@
         <dependency>
             <groupId>com.github.rspace-os</groupId>
             <artifactId>rda-dmp-common-standard</artifactId>
-            <version>0.0.4</version>
+            <version>0.0.5</version>
         </dependency>
 
         <dependency>

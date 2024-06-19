@@ -1,9 +1,12 @@
 package com.researchspace.dmptool.client;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.researchspace.dmptool.model.DMPList;
 import com.researchspace.dmptool.model.DMPPlanScope;
 import com.researchspace.dmptool.model.DMPToolDMP;
 import com.researchspace.dmptool.model.RelatedIdentifier;
+import com.researchspace.rda.model.DmpId;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,9 +22,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import com.researchspace.rda.model.DmpId;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class DMPToolClientImpl implements DMPToolClient {
 
@@ -59,17 +59,22 @@ public class DMPToolClientImpl implements DMPToolClient {
 		).getBody().getItems().get(0);
 	}
 
-	public byte[] getPdfBytes(
+	public String getJson(
 		DMPToolDMP dmp,
 		String accessToken
 	 ) throws URISyntaxException, MalformedURLException {
-		URI uri = new URL(dmp.getLinks().get("download")).toURI();
+		URI uri = new URL(dmp.getLinks().get("get")).toURI();
 		return restTemplate.exchange(
 			uri,
 			HttpMethod.GET,
 			new HttpEntity<>(getHttpHeaders(accessToken)),
-			byte[].class
+			String.class
 		).getBody();
+	}
+
+	@Override
+	public URL getApiUrlBase() {
+		return apiUrlBase;
 	}
 
 	@Data

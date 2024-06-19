@@ -1,21 +1,19 @@
 package com.researchspace.dmptool.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import java.util.Map;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import java.util.Optional;
-import com.researchspace.rda.model.DMP;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.researchspace.rda.model.DMP;
+import java.util.Map;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 @JsonTypeName(value = "dmp")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class DMPToolDMP extends DMP {
 
 	@JsonProperty("dmproadmap_links")
