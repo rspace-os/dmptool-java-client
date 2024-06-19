@@ -1,13 +1,13 @@
 package com.researchspace.dmptool.client;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.researchspace.dmptool.model.DMPList;
 import com.researchspace.dmptool.model.DMPPlanScope;
 import com.researchspace.dmptool.model.DMPToolDMP;
 import com.researchspace.dmptool.model.RelatedIdentifier;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import java.net.URL;
 import org.springframework.web.client.RestClientException;
 
 /**
@@ -34,7 +34,7 @@ public interface DMPToolClient {
 	/**
 	 * Downloads a PDF of the DMP.
 	 */
-	byte[] getPdfBytes(
+	String getJson(
 		DMPToolDMP dmp,
 		String accessToken
 	 ) throws URISyntaxException, MalformedURLException;
@@ -47,5 +47,7 @@ public interface DMPToolClient {
 		RelatedIdentifier relatedIdentifier,
 		String accessToken
 	 ) throws URISyntaxException, MalformedURLException, RestClientException, JsonProcessingException;
+
+	URL getApiUrlBase();
 
 }
