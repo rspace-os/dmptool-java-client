@@ -113,7 +113,7 @@ public class DMPToolClientImpl implements DMPToolClient {
 		String body = new ObjectMapper().writeValueAsString(wrapper);
 
 		HttpHeaders headers = getHttpHeaders(accessToken);
-		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		headers.setContentType(MediaType.APPLICATION_JSON);
 
 		restTemplate.exchange(
 			new URL(this.apiUrlBase, "related_identifiers").toURI(),
