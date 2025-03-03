@@ -13,3 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed some of the methods in `DMPToolClient.java`
 - Increased resilience for `DMPTool` JSONs response messages that contain fields that are not defined in the wrapper classes
 - Made sure that the `DMPToolClient.java` fetches the plan from the `get` link (rather than `download` as it was)
+
+## [0.2.1]
+- Fix communication errors when post related identifiers
