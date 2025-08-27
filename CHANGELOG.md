@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.3.0]
+- Restructuring DMP domain model
+
 ## [0.1.0]
 - Switch to using parent pom from rspace-os-parent project
 - Compile with java 17
