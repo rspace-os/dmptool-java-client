@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.4.0]
+- switch parent pom from rspace-os-parent to rspace-parent (updates/changes a lot of dependencies)
+- switch to latest rda-dmp-common-standard dependency
+
 ## [0.3.0]
 - Restructuring DMP domain model
 
